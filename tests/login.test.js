@@ -1,5 +1,6 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
+import { pegarBaseUrl } from '../utils/variaveis.js';
 
 const postLogin = JSON.parse(open('../fixtures/postLogin.json')); //open importa o arquivo como texto e o JSON.parse transforma em objeto
 
@@ -21,7 +22,7 @@ export const options = {
 
 export default function () {
     //teste do login
-    const url = 'http://localhost:3000/login';
+    const url = pegarBaseUrl() + '/login';
 
     //postLogin.username = "junior.lima";//altera o usuário
     const payload = JSON.stringify(postLogin);

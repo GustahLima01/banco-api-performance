@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { obterToken } from '../helpears/autenticacao.js'; 
+import { pegarBaseUrl } from '../utils/variaveis.js';
 
 export const options = {
   iterations: 1
@@ -9,7 +10,9 @@ export const options = {
 export default function() {
 const token = obterToken()
 
-const url = 'http://localhost:3000/transferencias';
+const url = pegarBaseUrl() + '/transferencias';
+//const url = __ENV.BASE_URL + '/transferencias'; //rodando via linha de comando apomtando o ambiente
+//const url = 'http://localhost:3000/transferencias'; //rodando via k6 run
 
 const payload = JSON.stringify({
   contaOrigiem: 1,
