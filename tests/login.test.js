@@ -1,6 +1,8 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 
+const postLogin = JSON.parse(open('../fixtures/postLogin.json')); //open importa o arquivo como texto e o JSON.parse transforma em objeto
+
 export const options = {
   //iterations: 50, //quantidade de iterações que vai executar
   // vus:10, //quantidade de usuários virtuais que vão executar o teste, substitui o iterations acima
@@ -21,10 +23,8 @@ export default function () {
     //teste do login
     const url = 'http://localhost:3000/login';
 
-    const payload = JSON.stringify({ //transforma o objeto em json
-        username: 'julio.lima',
-        senha: '123456',
-    });
+    //postLogin.username = "junior.lima";//altera o usuário
+    const payload = JSON.stringify(postLogin);
 
     const params = {
         headers: {
