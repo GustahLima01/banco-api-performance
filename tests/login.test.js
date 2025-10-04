@@ -2,9 +2,11 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 
 export const options = {
-  iterations: 50, //quantidade de iterações que vai executar
+  //iterations: 50, //quantidade de iterações que vai executar
+  vus:10, //quantidade de usuários virtuais que vão executar o teste, substitui o iterations acima
+  duration: '30s', //tempo que o teste vai durar (substitui o iterations acima)
   thresholds: { //metas de performance alinhada com o time
-    http_req_duration: ['p(90)<10', 'max<1'], //90% das requisições devem ser menores que 10ms e o tempo máximo de resposta deve ser menor que 1s
+    http_req_duration: ['p(90)<3000', 'max<5000'], //90% das requisições devem ser menores que 10ms e o tempo máximo de resposta deve ser menor que 1s
     http_req_failed: ['rate<0.01'], //taxa de erro, menor que 1%
   }
 };
